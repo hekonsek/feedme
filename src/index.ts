@@ -4,7 +4,7 @@ import yargs from "yargs";
 import {hideBin} from 'yargs/helpers'
 import chalk from "chalk"
 import boxen from "boxen"
-import {FeedMe, SayHello} from "./core.js";
+import {FeedMe, FileSystemOutput, SayHello} from "./core.js";
 
 let argv = yargs(hideBin(process.argv))
     .scriptName("quickstart-node-ts-cli")
@@ -19,7 +19,7 @@ if(argv["who"]) {
     who = <string>argv["who"]
 }
 
-new FeedMe().feed()
+new FeedMe(new FileSystemOutput()).feed()
 
 let msg = "Done!"
 let font = chalk.blue.underline

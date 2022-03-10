@@ -3,7 +3,7 @@ import yargs from "yargs";
 import { hideBin } from 'yargs/helpers';
 import chalk from "chalk";
 import boxen from "boxen";
-import { FeedMe } from "./core.js";
+import { FeedMe, FileSystemOutput } from "./core.js";
 var argv = yargs(hideBin(process.argv))
     .scriptName("quickstart-node-ts-cli")
     .command("* [who]", "Says hello world! You can specify to [who]m.")
@@ -12,7 +12,7 @@ var who = "world";
 if (argv["who"]) {
     who = argv["who"];
 }
-new FeedMe().feed();
+new FeedMe(new FileSystemOutput()).feed();
 var msg = "Done!";
 var font = chalk.blue.underline;
 msg = font(msg);

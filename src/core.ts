@@ -13,14 +13,53 @@ export class SayHello {
 
 export class FeedMe {
 
+    constructor(private output: Output) {
+    }
+
+
     feed() {
-        var products = []
-        for( let i = 0; i < 1000; i++ ) {
-            var product = {name: "productName"}
-            products.push(product)
+        for( let i = 0; i < 10; i++ ) {
+            for (let i = 0; i < 1000; i++) {
+                var product = new Product("productName")
+                this.output.append(product)
+            }
+            this.output.flush()
         }
-        var productsJSON = JSON.stringify({products: products})
-        fs.writeFileSync("output.json", productsJSON)
+    }
+
+}
+
+export interface Output {
+
+    append(product: Product)
+
+    flush()
+
+}
+
+export class FileSystemOutput implements Output{
+
+    private products = []
+
+    private flushes = 0
+
+    constructor() {
+    }
+
+    append(product: Product) {
+        this.products.push(product)
+    }
+
+    flush() {
+        var productsJSON = JSON.stringify({products: this.products})
+        fs.writeFileSync("output" + ++this.flushes + ".json", productsJSON)
+    }
+
+}
+
+export class Product {
+
+    constructor(public name: string) {
     }
 
 }
