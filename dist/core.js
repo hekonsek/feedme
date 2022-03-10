@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import { v4 as uuid } from 'uuid';
 var SayHello = /** @class */ (function () {
     function SayHello(name) {
         this.name = name;
@@ -28,14 +29,16 @@ export { FeedMe };
 var FileSystemOutput = /** @class */ (function () {
     function FileSystemOutput() {
         this.products = [];
-        this.flushes = 0;
     }
     FileSystemOutput.prototype.append = function (product) {
         this.products.push(product);
     };
     FileSystemOutput.prototype.flush = function () {
         var productsJSON = JSON.stringify({ products: this.products });
-        fs.writeFileSync("output" + ++this.flushes + ".json", productsJSON);
+        fs.writeFileSync(this.nextOutputFilename(), productsJSON);
+    };
+    FileSystemOutput.prototype.nextOutputFilename = function () {
+        return "output-" + uuid() + ".json";
     };
     return FileSystemOutput;
 }());
