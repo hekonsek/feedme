@@ -11,11 +11,13 @@ var SayHello = /** @class */ (function () {
 }());
 export { SayHello };
 var FeedMe = /** @class */ (function () {
-    function FeedMe(output) {
+    function FeedMe(output, batchCount) {
+        if (batchCount === void 0) { batchCount = 10; }
         this.output = output;
+        this.batchCount = batchCount;
     }
     FeedMe.prototype.feed = function () {
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < this.batchCount; i++) {
             for (var i_1 = 0; i_1 < 1000; i_1++) {
                 var product = new Product("productName");
                 this.output.append(product);

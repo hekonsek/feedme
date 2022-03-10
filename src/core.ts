@@ -14,12 +14,12 @@ export class SayHello {
 
 export class FeedMe {
 
-    constructor(private output: Output) {
+    constructor(private output: Output, private batchCount = 10) {
     }
 
 
     feed() {
-        for( let i = 0; i < 10; i++ ) {
+        for( let i = 0; i < this.batchCount; i++ ) {
             for (let i = 0; i < 1000; i++) {
                 let product = new Product("productName")
                 this.output.append(product)
