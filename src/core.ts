@@ -1,4 +1,5 @@
-import * as fs from "fs";
+import * as fs from "fs"
+import { v4 as uuid } from 'uuid'
 
 export class SayHello {
 
@@ -20,7 +21,7 @@ export class FeedMe {
     feed() {
         for( let i = 0; i < 10; i++ ) {
             for (let i = 0; i < 1000; i++) {
-                var product = new Product("productName")
+                let product = new Product("productName")
                 this.output.append(product)
             }
             this.output.flush()
@@ -41,8 +42,6 @@ export class FileSystemOutput implements Output{
 
     private products = []
 
-    private flushes = 0
-
     constructor() {
     }
 
@@ -51,8 +50,12 @@ export class FileSystemOutput implements Output{
     }
 
     flush() {
-        var productsJSON = JSON.stringify({products: this.products})
-        fs.writeFileSync("output" + ++this.flushes + ".json", productsJSON)
+        let productsJSON = JSON.stringify({products: this.products})
+        fs.writeFileSync(this.nextOutputFilename(), productsJSON)
+    }
+
+    nextOutputFilename() {
+        return "output-" + uuid() + ".json"
     }
 
 }

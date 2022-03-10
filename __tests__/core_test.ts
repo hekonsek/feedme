@@ -1,16 +1,22 @@
 import 'jest'
-import {SayHello} from "../src/core";
+import {FileSystemOutput} from "../src/core";
 
-describe('SayHello', () => {
-    let instance: SayHello;
+describe('FileSystemOutput', () => {
+    let instance: FileSystemOutput;
 
     beforeEach(() => {
-        instance = new SayHello("Henry");
+        instance = new FileSystemOutput()
     });
 
-    it('should print hello string', async () => {
-        let greeting = instance.sayHello();
-        expect(greeting).toBe("Hello Henry!");
+    it('should generate next output filename matching pattern', async () => {
+        let filename = instance.nextOutputFilename()
+        expect(filename).toMatch(/output-.+?\.json/)
+    });
+
+    it('should generate unique output filename', async () => {
+        let filename1 = instance.nextOutputFilename()
+        let filename2 = instance.nextOutputFilename()
+        expect(filename1).not.toBe(filename2)
     });
 
 });
