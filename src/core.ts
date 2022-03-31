@@ -1,5 +1,5 @@
 import * as fs from "fs"
-import { v4 as uuid } from 'uuid'
+import {v4 as uuid} from 'uuid'
 
 export class SayHello {
 
@@ -17,9 +17,8 @@ export class FeedMe {
     constructor(private output: Output, private batchCount = 10) {
     }
 
-
     feed() {
-        for( let i = 0; i < this.batchCount; i++ ) {
+        for (let i = 0; i < this.batchCount; i++) {
             for (let i = 0; i < 1000; i++) {
                 let product = new Product("productName")
                 this.output.append(product)
@@ -38,7 +37,7 @@ export interface Output {
 
 }
 
-export class FileSystemOutput implements Output{
+export class FileSystemOutput implements Output {
 
     private products = []
 
