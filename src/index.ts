@@ -7,17 +7,12 @@ import boxen from "boxen"
 import {FeedMe, FileSystemOutput, SayHello} from "./core.js";
 
 let argv = yargs(hideBin(process.argv))
-    .scriptName("quickstart-node-ts-cli")
+    .scriptName("feedme")
     .command(
         "* [who]",
         "Says hello world! You can specify to [who]m."
     )
     .argv
-
-let who = "world"
-if(argv["who"]) {
-    who = <string>argv["who"]
-}
 
 new FeedMe(new FileSystemOutput()).feed()
 

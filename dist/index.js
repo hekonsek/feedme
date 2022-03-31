@@ -5,13 +5,9 @@ import chalk from "chalk";
 import boxen from "boxen";
 import { FeedMe, FileSystemOutput } from "./core.js";
 var argv = yargs(hideBin(process.argv))
-    .scriptName("quickstart-node-ts-cli")
+    .scriptName("feedme")
     .command("* [who]", "Says hello world! You can specify to [who]m.")
     .argv;
-var who = "world";
-if (argv["who"]) {
-    who = argv["who"];
-}
 new FeedMe(new FileSystemOutput()).feed();
 var msg = "Done!";
 var font = chalk.blue.underline;
