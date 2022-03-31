@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "bin": {
-    "quickstart-node-ts-cli": "./dist/index.js"
+    "feedme": "./dist/index.js"
   },
   "scripts": {
     "init": "npm install",
