@@ -4,17 +4,23 @@ import yargs from "yargs";
 import {hideBin} from 'yargs/helpers'
 import chalk from "chalk"
 import boxen from "boxen"
-import {FeedMe, FileSystemOutput, SayHello} from "./core.js";
+import {FeedMe, FileSystemOutput, GcpOutput, SayHello} from "./core.js";
 
 let argv = yargs(hideBin(process.argv))
     .scriptName("feedme")
     .command(
-        "* [who]",
+        "* [output]",
         "Says hello world! You can specify to [who]m."
     )
     .argv
+let who = "file"
+if(argv["output"]) {
+    who = <string>argv["output"]
+}
 
-new FeedMe(new FileSystemOutput()).feed()
+let output = who == "file" ? new FileSystemOutput() : new GcpOutput()
+
+new FeedMe(output).feed()
 
 let msg = "Done!"
 let font = chalk.blue.underline

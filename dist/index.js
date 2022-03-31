@@ -3,12 +3,17 @@ import yargs from "yargs";
 import { hideBin } from 'yargs/helpers';
 import chalk from "chalk";
 import boxen from "boxen";
-import { FeedMe, FileSystemOutput } from "./core.js";
+import { FeedMe, FileSystemOutput, GcpOutput } from "./core.js";
 var argv = yargs(hideBin(process.argv))
     .scriptName("feedme")
-    .command("* [who]", "Says hello world! You can specify to [who]m.")
+    .command("* [output]", "Says hello world! You can specify to [who]m.")
     .argv;
-new FeedMe(new FileSystemOutput()).feed();
+var who = "file";
+if (argv["output"]) {
+    who = argv["output"];
+}
+var output = who == "file" ? new FileSystemOutput() : new GcpOutput();
+new FeedMe(output).feed();
 var msg = "Done!";
 var font = chalk.blue.underline;
 msg = font(msg);

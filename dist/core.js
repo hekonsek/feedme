@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import { v4 as uuid } from 'uuid';
+import { Storage } from '@google-cloud/storage';
 var SayHello = /** @class */ (function () {
     function SayHello(name) {
         this.name = name;
@@ -45,6 +46,25 @@ var FileSystemOutput = /** @class */ (function () {
     return FileSystemOutput;
 }());
 export { FileSystemOutput };
+var GcpOutput = /** @class */ (function () {
+    function GcpOutput() {
+        this.products = [];
+    }
+    GcpOutput.prototype.append = function (product) {
+        this.products.push(product);
+    };
+    GcpOutput.prototype.flush = function () {
+        var productsJSON = JSON.stringify({ products: this.products });
+        var storage = new Storage();
+        var stream = storage.bucket("feedme-test-henryk").file(this.nextOutputFilename()).createWriteStream();
+        stream.end(productsJSON);
+    };
+    GcpOutput.prototype.nextOutputFilename = function () {
+        return "output-" + uuid() + ".json";
+    };
+    return GcpOutput;
+}());
+export { GcpOutput };
 var Product = /** @class */ (function () {
     function Product(name) {
         this.name = name;

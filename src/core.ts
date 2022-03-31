@@ -1,5 +1,6 @@
 import * as fs from "fs"
 import {v4 as uuid} from 'uuid'
+import {Storage} from '@google-cloud/storage'
 
 export class SayHello {
 
@@ -51,6 +52,30 @@ export class FileSystemOutput implements Output {
     flush() {
         let productsJSON = JSON.stringify({products: this.products})
         fs.writeFileSync(this.nextOutputFilename(), productsJSON)
+    }
+
+    nextOutputFilename() {
+        return "output-" + uuid() + ".json"
+    }
+
+}
+
+export class GcpOutput implements Output {
+
+    private products = []
+
+    constructor() {
+    }
+
+    append(product: Product) {
+        this.products.push(product)
+    }
+
+    flush() {
+        let productsJSON = JSON.stringify({products: this.products})
+        let storage = new Storage()
+        let stream = storage.bucket("feedme-test-henryk").file(this.nextOutputFilename()).createWriteStream()
+        stream.end(productsJSON)
     }
 
     nextOutputFilename() {
