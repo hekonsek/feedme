@@ -1,6 +1,7 @@
 import * as fs from "fs"
 import {v4 as uuid} from 'uuid'
 import {Storage} from '@google-cloud/storage'
+import {Product, ProductBuilder} from "./model";
 
 export class SayHello {
 
@@ -21,7 +22,7 @@ export class FeedMe {
     feed() {
         for (let i = 0; i < this.batchCount; i++) {
             for (let i = 0; i < 1000; i++) {
-                let product = new Product("productName")
+                let product = ProductBuilder.newRandomProduct()
                 this.output.append(product)
             }
             this.output.flush()
@@ -80,13 +81,6 @@ export class GcpOutput implements Output {
 
     nextOutputFilename() {
         return "output-" + uuid() + ".json"
-    }
-
-}
-
-export class Product {
-
-    constructor(public name: string) {
     }
 
 }

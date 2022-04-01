@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import { v4 as uuid } from 'uuid';
 import { Storage } from '@google-cloud/storage';
+import { ProductBuilder } from "./model";
 var SayHello = /** @class */ (function () {
     function SayHello(name) {
         this.name = name;
@@ -20,7 +21,7 @@ var FeedMe = /** @class */ (function () {
     FeedMe.prototype.feed = function () {
         for (var i = 0; i < this.batchCount; i++) {
             for (var i_1 = 0; i_1 < 1000; i_1++) {
-                var product = new Product("productName");
+                var product = ProductBuilder.newRandomProduct();
                 this.output.append(product);
             }
             this.output.flush();
@@ -65,10 +66,3 @@ var GcpOutput = /** @class */ (function () {
     return GcpOutput;
 }());
 export { GcpOutput };
-var Product = /** @class */ (function () {
-    function Product(name) {
-        this.name = name;
-    }
-    return Product;
-}());
-export { Product };
