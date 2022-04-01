@@ -1,6 +1,6 @@
 {
   "name": "feedme",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "init": "npm install",
-    "build": "tsc && chmod +x ./dist/index.js",
+    "build": "tsc && chmod +x ./dist/index.js && sed -i 's/model/model.js/' dist/core.js",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "all": "npm run init && npm run build && npm run test"

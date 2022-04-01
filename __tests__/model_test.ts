@@ -1,5 +1,4 @@
 import 'jest'
-import {FileSystemOutput} from "../src/core";
 import {Product, ProductBuilder} from "../src/model";
 
 describe('Product', () => {

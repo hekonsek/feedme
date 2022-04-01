@@ -3,17 +3,6 @@ import {v4 as uuid} from 'uuid'
 import {Storage} from '@google-cloud/storage'
 import {Product, ProductBuilder} from "./model";
 
-export class SayHello {
-
-    constructor(public name: string) {
-    }
-
-    sayHello(): string {
-        return "Hello " + this.name + "!"
-    }
-
-}
-
 export class FeedMe {
 
     constructor(private output: Output, private batchCount = 10) {

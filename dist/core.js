@@ -1,17 +1,7 @@
 import * as fs from "fs";
 import { v4 as uuid } from 'uuid';
 import { Storage } from '@google-cloud/storage';
-import { ProductBuilder } from "./model";
-var SayHello = /** @class */ (function () {
-    function SayHello(name) {
-        this.name = name;
-    }
-    SayHello.prototype.sayHello = function () {
-        return "Hello " + this.name + "!";
-    };
-    return SayHello;
-}());
-export { SayHello };
+import { ProductBuilder } from "./model.js";
 var FeedMe = /** @class */ (function () {
     function FeedMe(output, batchCount) {
         if (batchCount === void 0) { batchCount = 10; }
