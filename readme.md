@@ -5,5 +5,5 @@
 To install FeedMe execute the following command:
 
 ```bash
-sudo npm install -g https://github.com/hekonsek/feedme/tarball/v0.6.0
+sudo npm install -g https://github.com/hekonsek/feedme/tarball/v0.7.0
 ```
